@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runehold — a duel of sigil cards</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-screen="title">
+
+<header class="topbar">
+  <div class="brand">✦ RUNEHOLD</div>
+  <div class="topbar-right">
+    <span class="topbar-hint">Keys: 1–7 select · Enter play · E end turn · M sound</span>
+    <button id="btn-mute" class="chip-btn" type="button">🔊 Sound on</button>
+  </div>
+</header>
+
+<!-- ============ TITLE SCREEN ============ -->
+<main id="screen-title" class="screen">
+  <div class="title-wrap">
+    <div class="title-glyphs" aria-hidden="true"><span class="g ember">▲</span><span class="g tide">●</span><span class="g thorn">◆</span><span class="g stone">■</span></div>
+    <h1 class="game-title">RUNEHOLD</h1>
+    <p class="tagline">A duel of sigil cards. Four suits, one table, no mercy.</p>
+    <p class="title-desc">You and Maren the Tidebound each hold <strong>30 Ward</strong>. Spend mana to play
+      cards, guard yourself, heal, and chain suits for <strong>Resonance</strong> — reduce her Ward
+      to zero before she reduces yours.</p>
+    <div class="title-buttons">
+      <button id="btn-play" class="big-btn" type="button">▶&nbsp; Play the duel</button>
+      <button id="btn-how" class="big-btn ghost" type="button">How to play</button>
+    </div>
+    <div id="how-panel" class="how-panel">
+      <h2>How to play</h2>
+      <ul>
+        <li><strong>Your turn:</strong> mana refills and grows by 1 each turn (up to 10). Draw a card, then play as many as you can afford.</li>
+        <li><strong>Attack</strong> (⚔) damages the rival's Ward. <strong>Guard</strong> (🛡) soaks damage until your next turn. <strong>Heal</strong> (✚) restores Ward.</li>
+        <li><strong>Resonance:</strong> play two cards of the same suit in a row and the second deals bonus damage.</li>
+        <li><strong>Win</strong> by reducing Maren's Ward to 0. <strong>Lose</strong> if yours reaches 0.</li>
+        <li><strong>The Long Night:</strong> from turn 12, both duellists lose Ward each turn (1, then 2, then 3…) — no duel stalls forever.</li>
+        <li><strong>Mouse:</strong> click a card to select it, click again (or double-click) to play it. <strong>Keyboard:</strong> 1–7 select, Enter plays, E ends the turn.</li>
+      </ul>
+      <button id="btn-how-close" class="chip-btn" type="button">Close</button>
+    </div>
+    <div id="suit-legend" class="suit-legend"></div>
+    <p class="title-foot">An original game — its cards, suits, art and sounds were made for Runehold. Runs entirely offline, no network.</p>
+  </div>
+</main>
+
+<!-- ============ TABLE ============ -->
+<main id="screen-table" class="screen">
+  <div class="table">
+    <div id="turn-banner" class="turn-banner">Your turn — Turn 1</div>
+
+    <!-- Rival side -->
+    <section class="side rival-side">
+      <div id="rival-portrait" class="portrait rival">
+        <div class="portrait-glyph">🌊</div>
+        <div class="portrait-name">Maren<br><span>the Tidebound</span></div>
+      </div>
+      <div class="side-body">
+        <div id="rival-ward" class="ward-block"></div>
+        <div class="table-row">
+          <div class="hand-group">
+            <div class="hand-label">Rival's hand <span id="rival-count" class="count"></span></div>
+            <div id="rival-hand" class="mini-hand"></div>
+          </div>
+          <div class="hand-group">
+            <div class="hand-label">Played this turn</div>
+            <div id="rival-played" class="mini-played"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="middle-strip">
+      <div id="game-log" class="game-log" aria-live="polite"></div>
+      <div id="resonance-note" class="resonance-note"></div>
+    </div>
+
+    <!-- Player side -->
+    <section class="side player-side">
+      <div id="player-portrait" class="portrait player">
+        <div class="portrait-glyph">✦</div>
+        <div class="portrait-name">You<br><span>the Challenger</span></div>
+      </div>
+      <div class="side-body">
+        <div id="player-ward" class="ward-block"></div>
+        <div class="table-row">
+          <div class="hand-group">
+            <div class="hand-label">Your hand <span id="player-count" class="count"></span></div>
+          </div>
+          <div class="hand-group played-group">
+            <div class="hand-label">Played this turn</div>
+            <div id="player-played" class="mini-played"></div>
+          </div>
+        </div>
+        <div id="player-hand" class="player-hand"></div>
+        <div class="controls">
+          <button id="btn-end-turn" class="big-btn" type="button">End Turn&nbsp; (E)</button>
+          <span class="controls-hint">Click a card to select · click again to play · 1–7 + Enter work too</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ============ WIN / LOSS ============ -->
+<main id="screen-end" class="screen">
+  <div class="end-wrap">
+    <h1 id="end-title" class="end-title win">VICTORY</h1>
+    <p id="end-sub" class="end-sub"></p>
+    <div id="end-stats" class="end-stats"></div>
+    <div class="title-buttons">
+      <button id="btn-again" class="big-btn" type="button">↻&nbsp; Play again</button>
+      <button id="btn-to-title" class="big-btn ghost" type="button">Title screen</button>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/game.js"></script>
+</body>
+</html>
